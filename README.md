@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LeBron James - Premium Aesthetic Resume</title>
+    <title>LeBron James - Interactive Premium Resume</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
 
@@ -106,6 +106,21 @@
             line-height: 1.6;
         }
 
+        /* Interactive Contact Links */
+        .contact-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.25s ease;
+            border-bottom: 1px solid transparent;
+            display: inline-block;
+        }
+
+        .contact-link:hover {
+            color: var(--accent-gold);
+            border-bottom-color: var(--accent-gold);
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+        }
+
         /* Section Styling */
         .section {
             margin-bottom: 45px;
@@ -132,7 +147,7 @@
             background: linear-gradient(to right, var(--border-subtle), transparent);
         }
 
-        /* Modernized Cards */
+        /* Modernized Interactive Cards */
         .content-box, .grid-box {
             position: relative;
             background: var(--bg-box);
@@ -141,15 +156,30 @@
             padding: 24px;
             margin-bottom: 20px;
             transform-style: preserve-3d;
-            will-change: transform;
+            will-change: transform, opacity, filter;
             overflow: hidden; 
-            transition: border-color 0.3s ease, background-color 0.3s ease;
+            cursor: pointer;
+            transition: border-color 0.3s ease, background-color 0.3s ease, opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
         }
         .content-box:last-child { margin-bottom: 0; }
 
         .content-box *, .grid-box * {
             position: relative;
             z-index: 2;
+        }
+
+        /* Selection Matrix Dimming States */
+        .content-box.dimmed, .grid-box.dimmed {
+            opacity: 0.15;
+            filter: grayscale(80%) blur(0.5px);
+            pointer-events: none;
+            transform: scale(0.98);
+        }
+
+        .content-box.highlighted, .grid-box.highlighted {
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 20px rgba(167, 139, 250, 0.15);
+            background: rgba(46, 40, 82, 0.4);
         }
 
         /* Dynamic Spotlight Overlay */
@@ -166,6 +196,62 @@
         .content-box:hover::before, .grid-box:hover::before {
             opacity: 1;
         }
+
+        /* Click Ripple Effect Canvas */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(245, 158, 11, 0.25);
+            transform: scale(0);
+            animation: ripple-core 0.6s ease-out;
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        @keyframes ripple-core {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Expandable Micro-Drawers */
+        .drawer {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, margin-top 0.4s ease;
+        }
+
+        .content-box.expanded .drawer, .grid-box.expanded .drawer {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px dashed rgba(167, 139, 250, 0.2);
+        }
+
+        .drawer-text {
+            font-size: 0.88rem !important;
+            color: #e2e8f0 !important;
+            background: rgba(10, 5, 25, 0.3);
+            padding: 12px 16px;
+            border-radius: 10px;
+            border-left: 3px solid var(--accent-gold);
+        }
+
+        .click-hint {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--accent-purple);
+            margin-top: 10px;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .content-box:hover .click-hint, .grid-box:hover .click-hint { opacity: 0.9; }
+        .content-box.expanded .click-hint, .grid-box.expanded .click-hint { display: none; }
 
         .content-box p {
             margin: 0;
@@ -245,7 +331,7 @@
             font-size: 1.05rem;
         }
 
-        /* Premium Minimalist Badges */
+        /* Premium Minimalist Badges Matrix */
         .skills {
             display: flex;
             flex-wrap: wrap;
@@ -260,17 +346,24 @@
             font-size: 0.88rem;
             font-weight: 600;
             border: 1px solid var(--border-subtle);
-            cursor: default;
-            will-change: transform;
+            cursor: pointer;
+            will-change: transform, background-color, border-color;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .skill:hover {
+            border-color: var(--accent-purple);
+            color: var(--text-light);
+            background: rgba(167, 139, 250, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .skill.matrix-active {
             border-color: var(--accent-gold);
             color: var(--accent-gold);
-            background: rgba(245, 158, 11, 0.08);
+            background: rgba(245, 158, 11, 0.12);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.15);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.1);
         }
 
         footer {
@@ -293,8 +386,8 @@
                 <h1 class="name">LeBron James</h1>
                 <p class="title">Professional Basketball Player & Entrepreneur</p>
                 <p class="contact">
-                    Los Angeles, California • (310) 555-0198 • lebron@jamesfamily.com<br>
-                    lebronjames.com • @KingJames
+                    Los Angeles, California • <a href="tel:3105550198" class="contact-link">(310) 555-0198</a> • <a href="mailto:lebron@jamesfamily.com" class="contact-link">lebron@jamesfamily.com</a><br>
+                    <a href="https://lebronjames.com" target="_blank" class="contact-link">lebronjames.com</a> • <a href="https://x.com/KingJames" target="_blank" class="contact-link">@KingJames</a>
                 </p>
             </div>
             <div class="photo">
@@ -305,10 +398,14 @@
         <!-- Summary -->
         <div class="section">
             <h2 class="section-title">Professional Summary</h2>
-            <div class="content-box">
+            <div class="content-box" data-skills="leadership high-performance strategic-thinking">
                 <p>
                     Four-time NBA Champion and four-time Finals MVP with over 20 years of professional experience. Known for exceptional leadership, high performance, and significant impact both on and off the court.
                 </p>
+                <span class="click-hint">⚡ Click to view strategic mission</span>
+                <div class="drawer">
+                    <p class="drawer-text">🎯 <strong>Core Objective:</strong> Executing high-stakes performance architecture by leveraging generational basketball IQ and cross-industry venture models.</p>
+                </div>
             </div>
         </div>
 
@@ -316,7 +413,7 @@
         <div class="section">
             <h2 class="section-title">Professional Experience</h2>
             
-            <div class="content-box">
+            <div class="content-box" data-skills="leadership teamwork high-performance mentorship basketball-iq">
                 <div class="row">
                     <div>
                         <div class="job-title">Small Forward</div>
@@ -329,9 +426,13 @@
                     <li>Consistently delivered elite statistical performances (25+ PPG, 8+ RPG, 8+ APG)</li>
                     <li>Mentored young players while maintaining high team performance standards</li>
                 </ul>
+                <span class="click-hint">⚡ Click to view deep-dive stats</span>
+                <div class="drawer">
+                    <p class="drawer-text">🏆 <strong>Key Metric:</strong> Secured the franchise's 17th championship while orchestrating court metrics as the primary point forward leader.</p>
+                </div>
             </div>
 
-            <div class="content-box">
+            <div class="content-box" data-skills="leadership high-performance basketball-iq teamwork">
                 <div class="row">
                     <div>
                         <div class="job-title">Small Forward</div>
@@ -342,9 +443,13 @@
                 <ul>
                     <li>Won 2016 NBA Championship with historic 3-1 series comeback</li>
                 </ul>
+                <span class="click-hint">⚡ Click to view deep-dive stats</span>
+                <div class="drawer">
+                    <p class="drawer-text">🧱 <strong>Key Metric:</strong> Overcame a historic statistical deficit to deliver the city its first modern professional championship title.</p>
+                </div>
             </div>
 
-            <div class="content-box">
+            <div class="content-box" data-skills="leadership teamwork high-performance basketball-iq">
                 <div class="row">
                     <div>
                         <div class="job-title">Small Forward</div>
@@ -355,6 +460,10 @@
                 <ul>
                     <li>Won back-to-back NBA Championships (2012 & 2013)</li>
                 </ul>
+                <span class="click-hint">⚡ Click to view deep-dive stats</span>
+                <div class="drawer">
+                    <p class="drawer-text">🔥 <strong>Key Metric:</strong> Maintained peak offensive and defensive efficiency rates, capturing consecutive regular-season MVP selections.</p>
+                </div>
             </div>
         </div>
 
@@ -362,19 +471,23 @@
         <div class="section">
             <h2 class="section-title">Key Achievements</h2>
             <div class="grid">
-                <div class="grid-box">
+                <div class="grid-box" data-skills="high-performance leadership basketball-iq">
                     <ul>
                         <li>4× NBA Champion</li>
                         <li>4× NBA Finals MVP</li>
                         <li>4× NBA Most Valuable Player</li>
                     </ul>
+                    <span class="click-hint">⚡ View details</span>
+                    <div class="drawer"><p class="drawer-text">🥇 Unprecedented achievement tier across three separate professional franchises.</p></div>
                 </div>
-                <div class="grid-box">
+                <div class="grid-box" data-skills="high-performance basketball-iq">
                     <ul>
                         <li>20× NBA All-Star</li>
                         <li>NBA All-Time Leading Scorer</li>
                         <li>20× All-NBA Team Selection</li>
                     </ul>
+                    <span class="click-hint">⚡ View details</span>
+                    <div class="drawer"><p class="drawer-text">📊 Broken longevity thresholds in modern athletic records scoring history.</p></div>
                 </div>
             </div>
         </div>
@@ -383,38 +496,46 @@
         <div class="section">
             <h2 class="section-title">Off-Court Ventures</h2>
             <div class="grid">
-                <div class="grid-box">
+                <div class="grid-box" data-skills="leadership brand-building strategic-thinking public-speaking">
                     <strong>SpringHill Company</strong><br>
                     Co-Founder of a leading multimedia and entertainment company.
+                    <span class="click-hint">⚡ View impact</span>
+                    <div class="drawer"><p class="drawer-text">🎬 Scale metric: Structured multi-million dollar media distribution contracts focused on creator equity.</p></div>
                 </div>
-                <div class="grid-box">
+                <div class="grid-box" data-skills="leadership mentorship public-speaking">
                     <strong>LeBron James Family Foundation</strong><br>
                     Founder – Dedicated to education and youth development in Akron, Ohio.
+                    <span class="click-hint">⚡ View impact</span>
+                    <div class="drawer"><p class="drawer-text">🎓 Social metric: Built and financed the system framework supporting the 'I PROMISE' institutional layout.</p></div>
                 </div>
-                <div class="grid-box">
+                <div class="grid-box" data-skills="strategic-thinking brand-building">
                     <strong>Business Investments</strong><br>
                     Investor in Blaze Pizza, Liverpool FC, and various tech & wellness companies.
+                    <span class="click-hint">⚡ View impact</span>
+                    <div class="drawer"><p class="drawer-text">📈 Venture design: Early seed capital equity allocation resulting in scalable market enterprise expansion.</p></div>
                 </div>
-                <div class="grid-box">
+                <div class="grid-box" data-skills="brand-building public-speaking strategic-thinking">
                     <strong>Brand Partnerships</strong><br>
                     Long-term global ambassador for Nike and other premium brands.
+                    <span class="click-hint">⚡ View impact</span>
+                    <div class="drawer"><p class="drawer-text">👟 Enterprise value: Structured an institutional lifecycle alliance layout worth billions in joint assets.</p></div>
                 </div>
             </div>
         </div>
 
         <!-- Skills -->
         <div class="section">
-            <h2 class="section-title">Skills</h2>
+            <h2 class="section-title">Skills Matrix</h2>
             <div class="content-box">
                 <div class="skills">
-                    <div class="skill">Leadership</div>
-                    <div class="skill">Teamwork</div>
-                    <div class="skill">High Performance</div>
-                    <div class="skill">Mentorship</div>
-                    <div class="skill">Public Speaking</div>
-                    <div class="skill">Brand Building</div>
-                    <div class="skill">Strategic Thinking</div>
-                    <div class="skill">Basketball IQ</div>
+                    <div class="skill" data-skill-id="leadership">Leadership</div>
+                    <div class="skill" data-skill-id="teamwork">Teamwork</div>
+                    <div class="skill" data-skill-id="high-performance">High Performance</div>
+                    <div class="skill" data-skill-id="mentorship">Mentorship</div>
+                    <div class="skill" data-skill-id="public-speaking">Public Speaking</div>
+                    <div class="skill" data-skill-id="brand-building">Brand Building</div>
+                    <div class="skill" data-skill-id="strategic-thinking">Strategic Thinking</div>
+                    <div class="skill" data-skill-id="basketball-iq">Basketball IQ</div>
                 </div>
             </div>
         </div>
@@ -427,8 +548,9 @@
         document.addEventListener('DOMContentLoaded', () => {
             const structuralCards = document.querySelectorAll('.content-box, .grid-box');
             const avatar = document.querySelector('.photo');
+            const skills = document.querySelectorAll('.skill');
 
-            // 3D Tilt & Micro-Spotlight Interactions
+            // 3D mechanical Tilt, Spotlight & Expand Drawer Mechanics
             structuralCards.forEach(card => {
                 card.addEventListener('mousemove', (e) => {
                     const rect = card.getBoundingClientRect();
@@ -453,6 +575,57 @@
                     card.style.borderColor = '';
                     card.style.backgroundColor = '';
                     card.style.transition = 'transform 0.4s ease, border-color 0.3s ease, background-color 0.3s ease';
+                });
+
+                // Micro-drawer expand click listener
+                card.addEventListener('click', (e) => {
+                    // Do not toggle drawer if user clicks an actual hyperlink
+                    if (e.target.tagName.toLowerCase() === 'a') return;
+
+                    // Generate mechanical ripple
+                    const ripple = document.createElement('span');
+                    ripple.classList.add('ripple');
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    ripple.style.left = `${x}px`;
+                    ripple.style.top = `${y}px`;
+                    card.appendChild(ripple);
+                    
+                    setTimeout(() => ripple.remove(), 600);
+
+                    // Toggle presentation layout state
+                    card.classList.toggle('expanded');
+                });
+            });
+
+            // Skill Filtering Interactive System
+            skills.forEach(skill => {
+                skill.addEventListener('click', () => {
+                    const skillId = skill.getAttribute('data-skill-id');
+                    const isAlreadyActive = skill.classList.contains('matrix-active');
+
+                    // Reset past matrix state
+                    skills.forEach(s => s.classList.remove('matrix-active'));
+                    structuralCards.forEach(c => {
+                        c.classList.remove('dimmed');
+                        c.classList.remove('highlighted');
+                    });
+
+                    // Activate new filtering selection matrix
+                    if (!isAlreadyActive) {
+                        skill.classList.add('matrix-active');
+                        structuralCards.forEach(card => {
+                            const cardSkills = card.getAttribute('data-skills');
+                            if (cardSkills) {
+                                if (cardSkills.includes(skillId)) {
+                                    card.classList.add('highlighted');
+                                } else {
+                                    card.classList.add('dimmed');
+                                }
+                            }
+                        });
+                    }
                 });
             });
 
