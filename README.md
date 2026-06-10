@@ -3,25 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LeBron James - Premium Gold Resume</title>
+    <title>LeBron James - Premium Aesthetic Resume</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
 
         :root {
-            --bg-body: #0b0f17;        /* Deep obsidian black */
-            --bg-card: #121824;        /* Sleek dark charcoal for depth */
-            --text-light: #f8fafc;     /* Crisp white */
-            --text-muted: #94a3b8;     /* Clean slate gray */
-            --border-subtle: #1e293b;  /* Subtle structural dividing lines */
+            /* Aesthetic Jewel-Tone Palette */
+            --bg-gradient: linear-gradient(135deg, #0b0d19 0%, #16122c 50%, #25112e 100%);
+            --bg-card: rgba(26, 22, 46, 0.85); 
+            --bg-box: rgba(36, 31, 64, 0.5);
+            --text-light: #f8fafc;      /* Crisp off-white */
+            --text-muted: #cbd5e1;      /* Soft silver-blue */
+            --text-dim: #94a3b8;        /* Subtle slate */
+            --border-subtle: rgba(129, 140, 248, 0.15); /* Soft iridescent line */
             
-            /* Unified Premium Theme Palette */
+            /* Premium Accent Palette */
             --accent-gold: #f59e0b;     /* Championship Gold */
-            --accent-glow: rgba(245, 158, 11, 0.15);
+            --accent-purple: #a78bfa;   /* Royal Lavender */
+            --accent-glow: rgba(245, 158, 11, 0.12);
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--bg-body);
+            background: var(--bg-gradient);
+            background-attachment: fixed;
             color: var(--text-muted);
             margin: 0;
             padding: 60px 20px;
@@ -32,13 +37,15 @@
             max-width: 840px;
             margin: 0 auto;
             background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             padding: 50px 60px;
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
-            border-radius: 20px;
-            border: 1px solid var(--border-subtle);
+            box-shadow: 0 40px 100px rgba(10, 5, 25, 0.6), 0 0 80px rgba(167, 139, 250, 0.03);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        /* Clean, Sophisticated Header */
+        /* Sophisticated Header */
         .header {
             display: flex;
             align-items: center;
@@ -58,11 +65,12 @@
             height: 120px;
             overflow: hidden;
             flex-shrink: 0;
-            border-radius: 16px; 
+            border-radius: 20px; 
             border: 2px solid var(--accent-gold);
-            box-shadow: 0 0 20px var(--accent-glow);
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.2);
             will-change: transform;
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(255, 255, 255, 0.03);
         }
 
         .photo img {
@@ -73,43 +81,46 @@
         }
 
         .name {
-            font-size: 3rem;
+            font-size: 3.2rem;
             font-weight: 800;
-            letter-spacing: -1px;
+            letter-spacing: -1.5px;
             margin: 0 0 6px 0;
             color: var(--text-light);
+            background: linear-gradient(to right, #ffffff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .title {
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 1.05rem;
+            font-weight: 700;
             color: var(--accent-gold);
             margin: 0 0 14px 0;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
         }
 
         .contact {
             font-size: 0.9rem;
-            color: #64748b;
+            color: var(--text-dim);
             line-height: 1.6;
         }
 
-        /* Unified Section Headers */
+        /* Section Styling */
         .section {
-            margin-bottom: 40px;
+            margin-bottom: 45px;
         }
         .section:last-child {
             margin-bottom: 0;
         }
 
         .section-title {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 800;
-            color: var(--text-light);
+            color: var(--accent-purple);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
+            letter-spacing: 2.5px;
+            margin-bottom: 22px;
             display: flex;
             align-items: center;
             gap: 15px;
@@ -121,18 +132,18 @@
             background: linear-gradient(to right, var(--border-subtle), transparent);
         }
 
-        /* Premium Content Containers */
+        /* Modernized Cards */
         .content-box, .grid-box {
             position: relative;
-            background: #161e2e;
+            background: var(--bg-box);
             border: 1px solid var(--border-subtle);
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 24px;
             margin-bottom: 20px;
             transform-style: preserve-3d;
             will-change: transform;
             overflow: hidden; 
-            transition: border-color 0.3s ease;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
         }
         .content-box:last-child { margin-bottom: 0; }
 
@@ -141,7 +152,7 @@
             z-index: 2;
         }
 
-        /* Refined Subtle Spotlight Overlay */
+        /* Dynamic Spotlight Overlay */
         .content-box::before, .grid-box::before {
             content: '';
             position: absolute;
@@ -159,15 +170,15 @@
         .content-box p {
             margin: 0;
             font-size: 0.95rem;
-            line-height: 1.6;
-            color: #cbd5e1;
+            line-height: 1.65;
+            color: var(--text-muted);
         }
 
         .row {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .job-title {
@@ -180,17 +191,19 @@
             color: var(--accent-gold);
             font-weight: 600;
             font-size: 0.95rem;
-            margin-top: 2px;
+            margin-top: 3px;
+            letter-spacing: 0.5px;
         }
 
         .date {
-            color: var(--text-light);
-            font-size: 0.82rem;
-            font-weight: 600;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 4px 12px;
-            border-radius: 6px;
-            border: 1px solid var(--border-subtle);
+            color: var(--accent-purple);
+            font-size: 0.8rem;
+            font-weight: 700;
+            background: rgba(167, 139, 250, 0.08);
+            padding: 5px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(167, 139, 250, 0.15);
+            letter-spacing: 0.5px;
         }
 
         ul {
@@ -203,7 +216,7 @@
             margin-bottom: 8px;
             color: var(--text-muted);
             font-size: 0.95rem;
-            line-height: 1.5;
+            line-height: 1.6;
         }
         li:last-child { margin-bottom: 0; }
         
@@ -211,7 +224,7 @@
             color: var(--accent-gold);
         }
 
-        /* Clean Architectural Grid */
+        /* Grid Framework */
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -219,19 +232,20 @@
         }
 
         .grid-box {
-            padding: 20px;
+            padding: 22px;
             margin-bottom: 0; 
+            background: rgba(36, 31, 64, 0.4);
         }
 
         .grid-box strong {
             display: inline-block;
             font-weight: 700;
             color: var(--text-light);
-            margin-bottom: 4px;
-            font-size: 1rem;
+            margin-bottom: 6px;
+            font-size: 1.05rem;
         }
 
-        /* Unified Minimalist Skill Badges */
+        /* Premium Minimalist Badges */
         .skills {
             display: flex;
             flex-wrap: wrap;
@@ -239,32 +253,33 @@
         }
 
         .skill {
-            background: #1e293b;
-            color: #cbd5e1;
+            background: rgba(167, 139, 250, 0.06);
+            color: #e2e8f0;
             padding: 8px 16px;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 0.88rem;
             font-weight: 600;
             border: 1px solid var(--border-subtle);
             cursor: default;
             will-change: transform;
-            transition: all 0.25s ease;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .skill:hover {
             border-color: var(--accent-gold);
             color: var(--accent-gold);
-            background: rgba(245, 158, 11, 0.05);
+            background: rgba(245, 158, 11, 0.08);
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.1);
         }
 
         footer {
             text-align: center;
-            margin-top: 50px;
-            color: #475569;
+            margin-top: 60px;
+            color: rgba(148, 163, 184, 0.4);
             font-size: 0.8rem;
             font-weight: 600;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
         }
     </style>
@@ -413,7 +428,7 @@
             const structuralCards = document.querySelectorAll('.content-box, .grid-box');
             const avatar = document.querySelector('.photo');
 
-            // Clean 3D Mechanical Tilt & Unified Spotlight
+            // 3D Tilt & Micro-Spotlight Interactions
             structuralCards.forEach(card => {
                 card.addEventListener('mousemove', (e) => {
                     const rect = card.getBoundingClientRect();
@@ -426,16 +441,18 @@
                     card.style.setProperty('--mouse-x', `${x}px`);
                     card.style.setProperty('--mouse-y', `${y}px`);
 
-                    const maxRotation = 4; // Subtly lowered for premium aesthetic
+                    const maxRotation = 3; 
                     card.style.transform = `perspective(1000px) rotateX(${-transformY * maxRotation}deg) rotateY(${transformX * maxRotation}deg) translateY(-2px)`;
-                    card.style.borderColor = 'rgba(245, 158, 11, 0.3)';
-                    card.style.transition = 'transform 0.05s linear, border-color 0.2s ease';
+                    card.style.borderColor = 'rgba(245, 158, 11, 0.25)';
+                    card.style.backgroundColor = 'rgba(46, 40, 82, 0.6)';
+                    card.style.transition = 'transform 0.05s linear, border-color 0.2s ease, background-color 0.2s ease';
                 });
 
                 card.addEventListener('mouseleave', () => {
                     card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
                     card.style.borderColor = '';
-                    card.style.transition = 'transform 0.4s ease, border-color 0.3s ease';
+                    card.style.backgroundColor = '';
+                    card.style.transition = 'transform 0.4s ease, border-color 0.3s ease, background-color 0.3s ease';
                 });
             });
 
@@ -443,7 +460,7 @@
             if(avatar) {
                 avatar.addEventListener('mouseenter', () => {
                     avatar.style.transform = 'scale(1.05) rotate(-1deg)';
-                    avatar.style.boxShadow = '0 0 25px rgba(245, 158, 11, 0.35)';
+                    avatar.style.boxShadow = '0 0 30px rgba(245, 158, 11, 0.4)';
                 });
                 avatar.addEventListener('mouseleave', () => {
                     avatar.style.transform = 'scale(1) rotate(0deg)';
@@ -454,4 +471,4 @@
     </script>
 </body>
 
-</html> 
+</html>
